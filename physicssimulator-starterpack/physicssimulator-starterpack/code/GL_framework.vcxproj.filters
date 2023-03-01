@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{6a0250cf-86f6-4579-9ce6-40e0fde184b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{e5df4c51-09bb-4eab-ab18-f714c6298875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics\imgui">
+      <UniqueIdentifier>{b91fcc8f-7290-4e45-b1d5-76fcebb05cda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{03bd365e-6b2d-452d-9ed3-617763d6fa1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{f234b94f-0a0f-4944-826e-6d6ea19d6c5f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui.cpp">
+      <Filter>Source Files\Graphics\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_demo.cpp">
+      <Filter>Source Files\Graphics\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_draw.cpp">
+      <Filter>Source Files\Graphics\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imgui\imgui_impl_sdl_gl3.cpp">
+      <Filter>Source Files\Graphics\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderPrims.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Buffers.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Program.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PrimitiveManager.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Parabola.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\RenderPrims.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Buffers.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Program.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PrimitiveManager.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Parabola.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\Sphere.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Sphere.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Sphere.gs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Capsule.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Capsule.gs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Capsule.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cube.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cube.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Mesh.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Mesh.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Box.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Box.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Axis.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Axis.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
