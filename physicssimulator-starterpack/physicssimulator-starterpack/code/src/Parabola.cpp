@@ -33,22 +33,22 @@ void ParabolaSim::Update(float dt)
 void ParabolaSim::RenderUpdate() 
 {
 	/*particlesPrim->firstParticle = 0;
-	particlesPrim->numParticles = 2;
+	particlesPrim->numParticles = 100;
 	particlesPrim->Update(0, 2, &(positions[0].x));*/
 }
 void ParabolaSim::RenderGui() 
 {
-	/*
+	
 	ImGui::SliderFloat("Emission Rate (particles/s)",
 						&emissionRate,
-						Particles::MIN_EMISSION_RATE,
-						Particles::MAX_EMISSION_RATE);
+						MIN_EMISSION_RATE,
+						MAX_EMISSION_RATE);
 
 	ImGui::SliderFloat("Particle Life (s)",
 						&particleLife,
-						Particles::MIN_LIFE,
-						Particles::MAX_LIFE);
-	*/
+						MIN_LIFE,
+						MAX_LIFE);
+	
 }
 
 void ParabolaSim::EulerSolver(float dt)

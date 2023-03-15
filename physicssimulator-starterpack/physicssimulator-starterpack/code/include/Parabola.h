@@ -32,4 +32,9 @@ private:
 	glm::vec3 acceleration;
 
 	int totalTime;
+
+	const int MIN_EMISSION_RATE = 100;
+	const int MAX_EMISSION_RATE = 1000;
+	const int MIN_LIFE = 1;
+	const int MAX_LIFE = 5;
 };
