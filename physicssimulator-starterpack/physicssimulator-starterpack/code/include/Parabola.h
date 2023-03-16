@@ -1,6 +1,7 @@
 #pragma once
 #include <Simulator.h>
 #include <RenderPrims.h>
+#include <vector>
 #include "imgui/imgui.h"
 
 class ParabolaSim : public Simulator {
@@ -18,10 +19,12 @@ private:
 	float emissionRate = 100.0f;
 	float particleLife = 1.0f;
 	int nParticles = emissionRate * particleLife;
-	static const int nParts = 2;
+	static const int nParts = 20;
 	
 	glm::vec3 positions[nParts];
 	glm::vec3 velocities[nParts];
+	//contenedor de acceleraciones para las colisiones
+	glm::vec3 accelerations[nParts];
 
 	glm::vec3 currentPos;
 	glm::vec3 currentVel;
