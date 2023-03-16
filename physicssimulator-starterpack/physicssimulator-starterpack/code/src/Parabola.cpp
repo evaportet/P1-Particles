@@ -14,9 +14,16 @@ ParabolaSim::ParabolaSim()
 
 	totalTime = 0;
 
-	particlesPrim = manager.NewParticles(nParticles);
+	for (int i = 0; i < nParts; i++)
+	{
+		positions[i] = glm::vec3(rand() % 5);
+		velocities[i] = glm::vec3(rand() % 5);
+		accelerations[i] = glm::vec3(0.0f, -0.981f, 0.0f);
+	}
+
+	particlesPrim = manager.NewParticles(nParts);
 	particlesPrim->firstParticle = 0;
-	particlesPrim->numParticles = nParticles;
+	particlesPrim->numParticles = nParts;
 }
 
 ParabolaSim::~ParabolaSim() 
@@ -28,13 +35,13 @@ void ParabolaSim::Update(float dt)
 {
 	totalTime += dt;
 	EulerSolver(dt);
-	particlesPrim->Update(0, 1, &(currentPos.x));
+	//particlesPrim->Update(0, 1, &(currentPos.x));
 }
 void ParabolaSim::RenderUpdate() 
 {
 	/*particlesPrim->firstParticle = 0;
-	particlesPrim->numParticles = 100;
-	particlesPrim->Update(0, 2, &(positions[0].x));*/
+	particlesPrim->numParticles = 100;*/
+	particlesPrim->Update(0, nParts, &(positions[0].x));
 }
 void ParabolaSim::RenderGui() 
 {
@@ -53,6 +60,12 @@ void ParabolaSim::RenderGui()
 
 void ParabolaSim::EulerSolver(float dt)
 {
+	for (int i = 0; i < nParts; i++)
+	{
+		positions[i] = positions[i] + dt * velocities[i];
+		velocities[i] = velocities[i] + dt * accelerations[i];
+	}
+
 	currentPos = previousPos + dt * currentVel;
 	previousPos = currentPos;
 
