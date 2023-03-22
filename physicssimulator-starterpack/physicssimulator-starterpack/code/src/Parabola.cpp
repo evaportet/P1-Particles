@@ -5,13 +5,6 @@ extern graphics::PrimitiveManager manager;
 
 ParabolaSim::ParabolaSim() 
 {
-	currentPos = glm::vec3(0.0f, 0.0f, 0.0f);
-	currentVel = glm::vec3(1.0f, 3.0f, 1.0f);
-	acceleration = glm::vec3(0.0f, -0.981f, 0.0f);
-
-	previousPos = currentPos;
-	previousVel = currentVel;
-
 	totalTime = 0;
 
 	for (int i = 0; i < nParts; i++)
@@ -36,6 +29,7 @@ void ParabolaSim::Update(float dt)
 	totalTime += dt;
 	EulerSolver(dt);
 	//particlesPrim->Update(0, 1, &(currentPos.x));
+	nParticles = emissionRate + particleLife;
 }
 void ParabolaSim::RenderUpdate() 
 {
@@ -65,10 +59,4 @@ void ParabolaSim::EulerSolver(float dt)
 		positions[i] = positions[i] + dt * velocities[i];
 		velocities[i] = velocities[i] + dt * accelerations[i];
 	}
-
-	currentPos = previousPos + dt * currentVel;
-	previousPos = currentPos;
-
-	currentVel = previousVel + dt * acceleration;
-	previousVel = currentVel;
 }
