@@ -26,14 +26,6 @@ private:
 	//contenedor de acceleraciones para las colisiones
 	glm::vec3 accelerations[nParts];
 
-	glm::vec3 currentPos;
-	glm::vec3 currentVel;
-
-	glm::vec3 previousPos;
-	glm::vec3 previousVel;
-
-	glm::vec3 acceleration;
-
 	int totalTime;
 
 	const int MIN_EMISSION_RATE = 100;
