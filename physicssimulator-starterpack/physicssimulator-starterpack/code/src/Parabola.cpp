@@ -7,21 +7,21 @@ ParabolaSim::ParabolaSim()
 {
 	totalTime = 0;
 
-	position		=	{ 0.0f,	  0.0f,	0.0f };
-	velocity		=	{ 0.0f,	  0.0f,	0.0f };
+	position		=	{ 2.0f,	  0.0f,	2.0f };
+	velocity		=	{ 6.0f,	 15.0f,	6.0f };
 	acceleration	=	{ 0.0f,	-9.81f, 0.0f };
 
 	float velocityModule = sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
 
-	//xyAngle = ;
-	//xzAngle = ;
-	//yzAngle = ;
+	xyAngle = acos(velocity.x / velocityModule);
+	xzAngle = acos(velocity.z / velocityModule);;
+	yzAngle = acos(velocity.z / velocityModule);;
 
 	for (int i = 0; i < nParts; i++)
 	{
-		positions[i] = position;
-		velocities[i] = velocity;
-		accelerations[i] = acceleration;
+		positions[i] = { rand() % (int)position.x, position.y, rand() % (int)position.z };
+		velocities[i] = { rand() % (int)velocity.x, velocity.y, rand() % (int)velocity.z };
+		accelerations[i] = { acceleration.x, acceleration.y, acceleration.z };
 	}
 
 	particlesPrim = manager.NewParticles(nParts);
