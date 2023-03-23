@@ -7,11 +7,21 @@ ParabolaSim::ParabolaSim()
 {
 	totalTime = 0;
 
+	position		=	{ 0.0f,	  0.0f,	0.0f };
+	velocity		=	{ 0.0f,	  0.0f,	0.0f };
+	acceleration	=	{ 0.0f,	-9.81f, 0.0f };
+
+	float velocityModule = sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
+
+	//xyAngle = ;
+	//xzAngle = ;
+	//yzAngle = ;
+
 	for (int i = 0; i < nParts; i++)
 	{
-		positions[i] = glm::vec3(rand() % 5);
-		velocities[i] = glm::vec3(rand() % 5);
-		accelerations[i] = glm::vec3(0.0f, -0.981f, 0.0f);
+		positions[i] = position;
+		velocities[i] = velocity;
+		accelerations[i] = acceleration;
 	}
 
 	particlesPrim = manager.NewParticles(nParts);
