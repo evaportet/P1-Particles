@@ -1,11 +1,11 @@
 #include <Parabola.h>
 #include <PrimitiveManager.h>
 
-extern graphics::PrimitiveManager manager;
 
 ParabolaSim::ParabolaSim() 
 {
-	totalTime = 0;
+	emiter = new Cascada(glm::vec3(-1.f, 6.f, 0.f), glm::vec3(1.f, 6.f, 0.f), glm::vec3(0.f, 0.f, 1.f), 5.f);
+	/*totalTime = 0;
 
 	for (int i = 0; i < nParts; i++)
 	{
@@ -16,47 +16,41 @@ ParabolaSim::ParabolaSim()
 
 	particlesPrim = manager.NewParticles(nParts);
 	particlesPrim->firstParticle = 0;
-	particlesPrim->numParticles = nParts;
+	particlesPrim->numParticles = nParts;*/
 }
 
 ParabolaSim::~ParabolaSim() 
 {
-	manager.DestroyPrimitive(particlesPrim);
+	delete emiter;
+	//manager.DestroyPrimitive(particlesPrim);
 }
 
 void ParabolaSim::Update(float dt) 
 {
-	totalTime += dt;
-	EulerSolver(dt);
+	//totalTime += dt;
+	//EulerSolver(dt);
+	emiter->Update(dt);
 	//particlesPrim->Update(0, 1, &(currentPos.x));
-	nParticles = emissionRate + particleLife;
+	//nParticles = emissionRate + particleLife;
 }
 void ParabolaSim::RenderUpdate() 
 {
 	/*particlesPrim->firstParticle = 0;
 	particlesPrim->numParticles = 100;*/
-	particlesPrim->Update(0, nParts, &(positions[0].x));
+	//particlesPrim->Update(0, nParts, &(positions[0].x));
+	emiter->Render();
 }
 void ParabolaSim::RenderGui() 
 {
-	
-	ImGui::SliderFloat("Emission Rate (particles/s)",
-						&emissionRate,
-						MIN_EMISSION_RATE,
-						MAX_EMISSION_RATE);
-
-	ImGui::SliderFloat("Particle Life (s)",
-						&particleLife,
-						MIN_LIFE,
-						MAX_LIFE);
+	emiter->RenderGUI();
 	
 }
 
-void ParabolaSim::EulerSolver(float dt)
-{
-	for (int i = 0; i < nParts; i++)
-	{
-		positions[i] = positions[i] + dt * velocities[i];
-		velocities[i] = velocities[i] + dt * accelerations[i];
-	}
-}
+//void ParabolaSim::EulerSolver(float dt)
+//{
+//	for (int i = 0; i < nParts; i++)
+//	{
+//		positions[i] = positions[i] + dt * velocities[i];
+//		velocities[i] = velocities[i] + dt * accelerations[i];
+//	}
+//}
