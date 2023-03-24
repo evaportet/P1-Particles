@@ -6,7 +6,7 @@
 class Font : public Emiter
 {
 public:
-	Font(glm::vec3 pA, glm::vec3 dir, float dirMagnitude);
+	Font(glm::vec3 p, glm::vec3 dir, float dirMagnitude);
 	~Font();
 
 	void Update(float dt) override;
@@ -14,7 +14,7 @@ public:
 	void RenderGUI();
 
 private:
-	glm::vec3 pointA;
+	glm::vec3 point;
 	glm::vec3 spawnVel;
 	float velMagnitude;
 	float angle;

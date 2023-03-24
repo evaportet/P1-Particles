@@ -1,6 +1,7 @@
 #pragma once
 #include<Emiter.h>
 #include<Cascada.h>
+#include<Font.h>
 #include "imgui/imgui.h"
 
 class ParabolaSim : public Simulator {
@@ -14,5 +15,6 @@ public:
 	//void EulerSolver(float dt);
 
 private:
-	Emiter* emiter;
+	Emiter* emiter1;
+	Emiter* emiter2;
 };
