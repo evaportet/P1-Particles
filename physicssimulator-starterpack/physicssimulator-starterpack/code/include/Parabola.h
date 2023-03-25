@@ -2,6 +2,8 @@
 #include<Emiter.h>
 #include<Cascada.h>
 #include<Font.h>
+#include<Esfera.h>
+#include<Pastilla.h>
 #include "imgui/imgui.h"
 
 class ParabolaSim : public Simulator {
@@ -17,4 +19,7 @@ public:
 private:
 	Emiter* emiter1;
 	Emiter* emiter2;
+
+	Esfera* esfera;
+	Pastilla* pastilla;
 };

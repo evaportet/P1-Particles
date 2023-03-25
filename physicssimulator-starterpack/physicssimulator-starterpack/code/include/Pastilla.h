@@ -5,16 +5,16 @@
 #include <PrimitiveManager.h>
 #include "imgui/imgui.h"
 
-class Esfera
+class Pastilla
 {
 protected:
-	graphics::SpherePrimitive* spherePrim;
+	graphics::CapsulePrimitive* capsulePrim;
 	float radius;
-	glm::vec3 position;
-
+	glm::vec3 position1;
+	glm::vec3 position2;
 public:
-	Esfera(float r, glm::vec3 p);
-	~Esfera();
+	Pastilla(glm::vec3 p1, glm::vec3 p2, float r);
+	~Pastilla();
 
 	void Render();
 	void RenderGUI();
