@@ -141,6 +141,7 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClCompile Include="src\Buffers.cpp" />
     <ClCompile Include="src\Cascada.cpp" />
     <ClCompile Include="src\Emiter.cpp" />
+    <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Parabola.cpp" />
     <ClCompile Include="src\PrimitiveManager.cpp" />
@@ -153,6 +154,7 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClInclude Include="include\Buffers.h" />
     <ClInclude Include="include\Cascada.h" />
     <ClInclude Include="include\Emiter.h" />
+    <ClInclude Include="include\Font.h" />
     <ClInclude Include="include\Parabola.h" />
     <ClInclude Include="include\PrimitiveManager.h" />
     <ClInclude Include="include\RenderPrims.h" />

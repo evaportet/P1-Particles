@@ -1,13 +1,13 @@
-#include "Cascada.h"
+#include "Font.h"
 
-Cascada::Cascada(glm::vec3 pA, glm::vec3 pB, glm::vec3 dir, float dirMagnitude) 
-	: pointA(pA), pointB(pB), spawnVel(dir), velMagnitude(dirMagnitude), Emiter(200, 1.5f)
+Font::Font(glm::vec3 p, glm::vec3 t, glm::vec3 r, glm::vec3 dir, float dirMagnitude)
+	: point(p), target(t), rotPoint(r), spawnVel(dir), velMagnitude(dirMagnitude), Emiter(200, 1.5f)
 {
 	nParts = 0;
-	angle = 0.f;
+	angle = 90.f;
 }
 
-void Cascada::Update(float dt)
+void Font::Update(float dt)
 {
 	for (int i = 0; i < nParts; i++)
 	{
@@ -31,7 +31,7 @@ void Cascada::Update(float dt)
 			RegeneratePrim(nParts);
 		}
 	}
-	
+
 	//spawn particles
 	if (nParts < currentMaxPart)
 	{
@@ -39,12 +39,12 @@ void Cascada::Update(float dt)
 		for (int i = 0; i < particlesToSpawn; i++)
 		{
 			//create particle
-			glm::vec3 segmentVect = pointB - pointA;
-			glm::vec3 randomPos = pointA + segmentVect * (float(rand() % 100)) / 100.f;
-			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(angle), segmentVect);
-			glm::vec3 splashedVel = vel * velMagnitude;
-			positions.push_back(randomPos);
-			velocities.push_back(splashedVel);
+			glm::vec3 directionVect = target - point;
+			glm::vec3 randomPos = point + directionVect * (float(rand() % 100)) / 100.f;
+			float randomangle = (float)(rand()) / angle;
+			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(randomangle), directionVect);
+			positions.push_back(point);
+			velocities.push_back(vel * velMagnitude);
 			accelerations.push_back(gravity);
 			lifeTimes.push_back(particleLife);
 
@@ -54,7 +54,7 @@ void Cascada::Update(float dt)
 	}
 }
 
-void Cascada::RenderGUI()
+void Font::RenderGUI()
 {
 	ImGui::SliderInt("Emission Rate (particles/s)",
 		&emissionRate,
@@ -65,20 +65,16 @@ void Cascada::RenderGUI()
 		&particleLife,
 		MIN_LIFE,
 		MAX_LIFE);
-	
+
 	ImGui::SliderInt("Max particles",
 		&currentMaxPart,
 		100,
 		10000);
-	
+
 	ImGui::Spacing();
-	ImGui::SliderFloat("Point A x", &pointA[0], -5.f, 5.f);
-	ImGui::SliderFloat("Point A y", &pointA[1], 0.f, 10.f);
-	ImGui::SliderFloat("Point A z", &pointA[2], -5.f, 5.f);
-	ImGui::Spacing();
-	ImGui::SliderFloat("Point B x", &pointB[0], -5.f, 5.f);
-	ImGui::SliderFloat("Point B y", &pointB[1], 0.f, 10.f);
-	ImGui::SliderFloat("Point B z", &pointB[2], -5.f, 5.f);
+	ImGui::SliderFloat("Point A x", &point[0], -5.f, 5.f);
+	ImGui::SliderFloat("Point A y", &point[1], 0.f, 10.f);
+	ImGui::SliderFloat("Point A z", &point[2], -5.f, 5.f);
 	ImGui::Spacing();
 	ImGui::SliderFloat3("Vel direction", &spawnVel[0], -1.f, 1.f, "%.1f");
 	ImGui::SliderFloat("Vel magnitude", &velMagnitude, -8.f, 8.f);
