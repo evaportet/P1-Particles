@@ -3,6 +3,7 @@
 #include <RenderPrims.h>
 #include <vector>
 #include <PrimitiveManager.h>
+#include "EulerStep.h"
 
 class Emiter
 {
@@ -31,9 +32,22 @@ protected:
 public:
 	Emiter(int em, float pl);
 	~Emiter();
+
+	glm::vec3 GetParticlePosition(int indice);
+	glm::vec3 GetParticleVelocity(int indice);
+	glm::vec3 GetParticleAcceleration(int indice);
+	
+	void SetParticlePosition(int index, glm::vec3 newP);
+	void SetParticleVelocity(int index, glm::vec3 newV);
+	void SetParticleAcceleration(int index, glm::vec3 newA);
+
+	int GetNumParticles();
+
+	virtual void UpdateParticle(int index, glm::vec3 pos, glm::vec3 vel, glm::vec3 a, float dt) = 0;
 	
 	virtual void Update(float dt) = 0;
 	virtual void RenderGUI() = 0;
 	void Render();
+	void ToggleVisibility(bool value);
 };
 

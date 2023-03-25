@@ -1,60 +1,97 @@
 #include <Parabola.h>
-#include <PrimitiveManager.h>
 
 
 ParabolaSim::ParabolaSim() 
 {
 	emiter1 = new Cascada(glm::vec3(-1.f, 6.f, 0.f), glm::vec3(1.f, 6.f, 0.f), glm::vec3(0.f, 0.f, 1.f), 5.f);
+	cascadeActive = true;
 	emiter2 = new Font(glm::vec3(-1.f, 6.f, 0.f), glm::vec3(-1.f, 12.f, 0.f), glm::vec3(1.f, 6.f, 0.f), glm::vec3(0.f, 0.f, 1.f), 5.f);
-	/*totalTime = 0;
-
-	for (int i = 0; i < nParts; i++)
-	{
-		positions[i] = glm::vec3(rand() % 5);
-		velocities[i] = glm::vec3(rand() % 5);
-		accelerations[i] = glm::vec3(0.0f, -0.981f, 0.0f);
-	}
-
-	particlesPrim = manager.NewParticles(nParts);
-	particlesPrim->firstParticle = 0;
-	particlesPrim->numParticles = nParts;*/
+	fountainActive = false;
 }
 
 ParabolaSim::~ParabolaSim() 
 {
 	delete emiter1;
 	delete emiter2;
-	//manager.DestroyPrimitive(particlesPrim);
+}
+
+ParabolaSim::CollisionBounceResult PlaneCollisionMirror(EulerStep s, Plano* p)
+{
+	ParabolaSim::CollisionBounceResult res;
+	//p = P' -2 * (n * P' + d) * n
+	res.resPos = s.endPos - 2.f * (p->GetNormal() * s.endPos + p->GetD()) * p->GetNormal();
+		//v = v' -2 * (n * v') * n
+	res.resVel = s.endVel - 2.f * ((p->GetNormal() * s.endVel)) * p->GetNormal();
+
+	return res;
 }
 
 void ParabolaSim::Update(float dt) 
 {
-	//totalTime += dt;
-	//EulerSolver(dt);
-	emiter1->Update(dt);
-	emiter2->Update(dt);
-	//particlesPrim->Update(0, 1, &(currentPos.x));
-	//nParticles = emissionRate + particleLife;
+	if (cascadeActive) {
+		for (int i = 0; i < emiter1->GetNumParticles(); i++)
+		{
+			EulerStep step = EulerStep::DoStep(
+				emiter1->GetParticlePosition(i),
+				emiter1->GetParticleVelocity(i),
+				emiter1->GetParticleAcceleration(i),
+				dt
+			);
+			emiter1->UpdateParticle(i, step.endPos, step.endVel, emiter1->GetParticleAcceleration(i), dt);
+			for (int j = 0; j < 6; j++)
+			{
+				if (Plano::colisionPointPlane(&paredes[j], emiter1->GetParticlePosition(i)))
+				{
+					CollisionBounceResult res = PlaneCollisionMirror(step, &paredes[j]);
+					emiter1->UpdateParticle(i, res.resPos, res.resVel, emiter1->GetParticleAcceleration(i), 0);
+				}
+			}
+		}
+		emiter1->Update(dt);
+	}
+
+	if (fountainActive) {
+		for (int i = 0; i < emiter2->GetNumParticles(); i++)
+		{
+			EulerStep step = EulerStep::DoStep(
+				emiter2->GetParticlePosition(i),
+				emiter2->GetParticleVelocity(i),
+				emiter2->GetParticleAcceleration(i),
+				dt
+			);
+			emiter2->UpdateParticle(i, step.endPos, step.endVel, emiter2->GetParticleAcceleration(i), dt);
+			for (int j = 0; j < 6; j++)
+			{
+				if (Plano::colisionPointPlane(&paredes[j], emiter2->GetParticlePosition(i)))
+				{
+					CollisionBounceResult res = PlaneCollisionMirror(step, &paredes[j]);
+					emiter2->UpdateParticle(i, res.resPos, res.resVel, emiter2->GetParticleAcceleration(i), 0);
+				}
+			}
+		}
+		emiter2->Update(dt);		
+	}
 }
 void ParabolaSim::RenderUpdate() 
-{
-	/*particlesPrim->firstParticle = 0;
-	particlesPrim->numParticles = 100;*/
-	//particlesPrim->Update(0, nParts, &(positions[0].x));
-	emiter1->Render();
-	emiter2->Render();
+{	
+	emiter1->ToggleVisibility(cascadeActive);
+	emiter2->ToggleVisibility(fountainActive);
+
+	if(cascadeActive) emiter1->Render();
+	if(fountainActive) emiter2->Render();
 }
 void ParabolaSim::RenderGui() 
 {
-	emiter1->RenderGUI();
-	emiter2->RenderGUI();
+	ImGui::Checkbox("Cascada", &cascadeActive);
+	if (cascadeActive) {
+		ImGui::Text("CASCADA:");
+		emiter1->RenderGUI();
+	}
+	ImGui::Checkbox("Font", &fountainActive);
+	if (fountainActive) {
+		ImGui::Spacing();
+		ImGui::Text("FUENTE:");
+		ImGui::Spacing();
+		emiter2->RenderGUI();
+	}
 }
-
-//void ParabolaSim::EulerSolver(float dt)
-//{
-//	for (int i = 0; i < nParts; i++)
-//	{
-//		positions[i] = positions[i] + dt * velocities[i];
-//		velocities[i] = velocities[i] + dt * accelerations[i];
-//	}
-//}
