@@ -75,6 +75,9 @@
     <ClCompile Include="src\Font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Plano.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderPrims.h">
@@ -100,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="include\Font.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Plano.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EulerStep.h">
+      <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

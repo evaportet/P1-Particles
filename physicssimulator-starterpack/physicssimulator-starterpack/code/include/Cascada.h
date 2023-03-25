@@ -10,6 +10,7 @@ public:
 	~Cascada();
 
 	void Update(float dt) override;
+	void UpdateParticle(int index, glm::vec3 pos, glm::vec3 vel, glm::vec3 a, float dt) override;
 
 	void RenderGUI();
 

@@ -9,14 +9,6 @@ Font::Font(glm::vec3 p, glm::vec3 t, glm::vec3 r, glm::vec3 dir, float dirMagnit
 
 void Font::Update(float dt)
 {
-	for (int i = 0; i < nParts; i++)
-	{
-		//EULER
-		positions[i] = positions[i] + dt * velocities[i];
-		velocities[i] = velocities[i] + dt * accelerations[i];
-		lifeTimes[i] -= dt;
-	}
-
 	//update lifetimes
 	for (int i = 0; i < nParts; i++)
 	{
@@ -52,6 +44,14 @@ void Font::Update(float dt)
 			RegeneratePrim(nParts);
 		}
 	}
+}
+
+void Font::UpdateParticle(int index, glm::vec3 pos, glm::vec3 vel, glm::vec3 a, float dt)
+{
+	positions[index] = pos;
+	velocities[index] = vel;
+	accelerations[index] = a;
+	lifeTimes[index] -= dt;
 }
 
 void Font::RenderGUI()
