@@ -42,8 +42,9 @@ void Cascada::Update(float dt)
 			glm::vec3 segmentVect = pointB - pointA;
 			glm::vec3 randomPos = pointA + segmentVect * (float(rand() % 100)) / 100.f;
 			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(angle), segmentVect);
+			glm::vec3 splashedVel = vel * velMagnitude;
 			positions.push_back(randomPos);
-			velocities.push_back(vel * velMagnitude);
+			velocities.push_back(splashedVel);
 			accelerations.push_back(gravity);
 			lifeTimes.push_back(particleLife);
 

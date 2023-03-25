@@ -1,10 +1,10 @@
 #include "Font.h"
 
-Font::Font(glm::vec3 p, glm::vec3 dir, float dirMagnitude)
-	: point(p), spawnVel(dir), velMagnitude(dirMagnitude), Emiter(200, 1.5f)
+Font::Font(glm::vec3 p, glm::vec3 t, glm::vec3 r, glm::vec3 dir, float dirMagnitude)
+	: point(p), target(t), rotPoint(r), spawnVel(dir), velMagnitude(dirMagnitude), Emiter(200, 1.5f)
 {
 	nParts = 0;
-	angle = 90.f;
+	angle = 0.f;
 }
 
 void Font::Update(float dt)
@@ -39,9 +39,11 @@ void Font::Update(float dt)
 		for (int i = 0; i < particlesToSpawn; i++)
 		{
 			//create particle
-			glm::vec3 randomPos = point * (float(rand() % 100)) / 100.f;
-			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(angle), randomPos);
-			positions.push_back(randomPos);
+			glm::vec3 directionVect = target - point;
+			glm::vec3 rotationVect = rotPoint - target;
+			glm::vec3 randomPos = point + directionVect * (float(rand() % 100)) / 100.f;
+			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(angle), rotationVect);
+			positions.push_back(point);
 			velocities.push_back(vel * velMagnitude);
 			accelerations.push_back(gravity);
 			lifeTimes.push_back(particleLife);

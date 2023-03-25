@@ -5,7 +5,7 @@
 ParabolaSim::ParabolaSim() 
 {
 	emiter1 = new Cascada(glm::vec3(-1.f, 6.f, 0.f), glm::vec3(1.f, 6.f, 0.f), glm::vec3(0.f, 0.f, 1.f), 5.f);
-	emiter2 = new Font(glm::vec3(-1.f, 6.f, 0.f), glm::vec3(0.f, 0.f, 1.f), 5.f);
+	emiter2 = new Font(glm::vec3(-1.f, 6.f, 0.f), glm::vec3(-1.f, 12.f, 0.f), glm::vec3(1.f, 6.f, 0.f), glm::vec3(0.f, 0.f, 1.f), 5.f);
 	/*totalTime = 0;
 
 	for (int i = 0; i < nParts; i++)
