@@ -4,7 +4,7 @@ Font::Font(glm::vec3 p, glm::vec3 t, glm::vec3 r, glm::vec3 dir, float dirMagnit
 	: point(p), target(t), rotPoint(r), spawnVel(dir), velMagnitude(dirMagnitude), Emiter(200, 1.5f)
 {
 	nParts = 0;
-	angle = 0.f;
+	angle = 90.f;
 }
 
 void Font::Update(float dt)
@@ -40,9 +40,9 @@ void Font::Update(float dt)
 		{
 			//create particle
 			glm::vec3 directionVect = target - point;
-			glm::vec3 rotationVect = rotPoint - target;
 			glm::vec3 randomPos = point + directionVect * (float(rand() % 100)) / 100.f;
-			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(angle), rotationVect);
+			float randomangle = (float)(rand()) / angle;
+			glm::vec3 vel = glm::rotate(spawnVel, glm::radians(randomangle), directionVect);
 			positions.push_back(point);
 			velocities.push_back(vel * velMagnitude);
 			accelerations.push_back(gravity);
