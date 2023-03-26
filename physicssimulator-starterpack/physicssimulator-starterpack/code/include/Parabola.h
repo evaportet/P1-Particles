@@ -5,6 +5,8 @@
 #include "EulerStep.h"
 #include<Font.h>
 #include "imgui/imgui.h"
+#include "Esfera.h"
+#include "Pastilla.h"
 
 class ParabolaSim : public Simulator {
 public:
@@ -26,9 +28,13 @@ public:
 private:
 	bool cascadeActive;
 	bool fountainActive;
+	bool sphereActive;
+	bool capsuleActive;
 
 	Emiter* emiter1;
 	Emiter* emiter2;
+	Esfera* esfera;
+	Pastilla* pastilla;
 	Plano paredes[6] = {
 		Plano(glm::vec3(0.f), glm::vec3(0.f, 1.f, 0.f), 0.f),				//Terra
 		Plano(glm::vec3(0.f, 10.f, 0.f), glm::vec3(0.f, -1.f, 0.f), 10.f),	//Sostre
