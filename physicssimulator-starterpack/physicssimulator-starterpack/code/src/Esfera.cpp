@@ -34,3 +34,20 @@ void Esfera::ToggleVisibility(bool val)
 {
 	spherePrim->SetVisible(val);
 }
+
+bool Esfera::PointInsideSphere(glm::vec3 p, Esfera* e)
+{
+	glm::vec3 vectorDistancia = { p.x - position.x, p.y - position.y, p.z - position.z };
+	float distancia = sqrt(vectorDistancia.x * vectorDistancia.x + vectorDistancia.y * vectorDistancia.y + vectorDistancia.z * vectorDistancia.z);
+	return distancia <= e->radius;
+}
+
+glm::vec3 Esfera::GetPosition()
+{
+	return position;
+}
+
+float Esfera::GetRadius()
+{
+	return radius;
+}

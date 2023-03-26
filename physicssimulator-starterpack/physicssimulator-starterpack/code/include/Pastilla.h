@@ -18,6 +18,9 @@ public:
 
 	void Render();
 	void RenderGUI();
-
 	void ToggleVisibility(bool val);
+	bool PointInsideCapsule(glm::vec3 p, Pastilla* c);
+	glm::vec3 GetPosition1();
+	glm::vec3 GetPosition2();
+	float GetRadius();
 };

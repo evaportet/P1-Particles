@@ -16,7 +16,6 @@ public:
 		glm::vec3 resPos;
 		glm::vec3 resVel;
 	};
-	//CollisionBounceResult PlaneCollisionMirror(EulerStep s, Plano* p);
 
 	ParabolaSim();
 	~ParabolaSim();

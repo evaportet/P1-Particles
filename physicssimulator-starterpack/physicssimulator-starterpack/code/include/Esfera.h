@@ -19,4 +19,7 @@ public:
 	void Render();
 	void RenderGUI();
 	void ToggleVisibility(bool val);
+	bool PointInsideSphere(glm::vec3 p, Esfera* e);
+	glm::vec3 GetPosition();
+	float GetRadius();
 };

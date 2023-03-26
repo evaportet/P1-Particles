@@ -1,4 +1,4 @@
-#include <Parabola.h>
+﻿#include <Parabola.h>
 
 
 ParabolaSim::ParabolaSim() 
@@ -10,7 +10,7 @@ ParabolaSim::ParabolaSim()
 	esfera = new Esfera(3, glm::vec3(0.5f, 0.f, -4.f));
 	sphereActive = false;
 	pastilla = new Pastilla(glm::vec3(3.f, 0.f, 3.f), glm::vec3(3.f, 2.f, 3.f), 3);
-	sphereActive = false;
+	capsuleActive = false;
 }
 
 ParabolaSim::~ParabolaSim() 
@@ -32,6 +32,86 @@ ParabolaSim::CollisionBounceResult PlaneCollisionMirror(EulerStep s, Plano* p)
 	return res;
 }
 
+ParabolaSim::CollisionBounceResult SphereCollision(EulerStep s, Esfera* e)
+{
+	ParabolaSim::CollisionBounceResult resultat;
+
+	//Crear variables auxiliars per facilitar treballar amb els nombres
+	glm::vec3 pos, vel, cen;
+	float rad;
+	pos = s.endPos;
+	vel = s.endVel;
+	cen = e->GetPosition();
+	rad = e->GetRadius();
+
+	float alphaX2, alphaY2, alphaZ2, alphaX1, alphaY1, alphaZ1, naturalX, naturalY, naturalZ, finalAlpha2, finalAlpha1, finalNatural;
+	//Fer a^2 + 2ab + b^2 amb cada eix de (x-cenx)^2 on x = px + alpha * vx
+	alphaX2 = vel.x * vel.x;
+	alphaX1 = vel.x * (pos.x - cen.x) * 2;
+	naturalX = (pos.x - cen.x) * (pos.x - cen.x);
+
+	alphaY2 = vel.y * vel.y;
+	alphaY1 = vel.y * (pos.y - cen.y) * 2;
+	naturalY = (pos.y - cen.y) * (pos.y - cen.y);
+
+	alphaZ2 = vel.z * vel.z;
+	alphaZ1 = vel.z * (pos.z - cen.z) * 2;
+	naturalZ = (pos.z - cen.z) * (pos.z - cen.z);
+
+	//Agrupar tots els resultats per tpus i dividir-los per r^2 per igualar l'operació a 0
+	finalAlpha2 = (alphaX2 + alphaY2 + alphaZ2) / (rad * rad);
+	finalAlpha1 = (alphaX1 + alphaY1 + alphaZ1) / (rad * rad);
+	finalNatural = (naturalX + naturalY + naturalZ) / (rad * rad);
+
+	//Calcular alpha amb una equació de segon grau
+	float a, b, c, x1, x2, alphaFinal;
+	a = finalAlpha2;
+	b = finalAlpha1;
+	c = finalNatural;
+	x1 = (-b + sqrt(b * b - 4 * a * c)) / (2 * a);
+	x2 = (-b - sqrt(b * b - 4 * a * c)) / (2 * a);
+
+	//Agafar la alpha més petita
+	alphaFinal = x1 < x2 ? x1 : x2;
+
+	//Resoldre P = P' + alpha * V
+	glm::vec3 puntRebot;
+	puntRebot.x = pos.x + alphaFinal * vel.x;
+	puntRebot.y = pos.y + alphaFinal * vel.y;
+	puntRebot.z = pos.z + alphaFinal * vel.z;
+
+	//Treure el vector normal del pla i normalitzar-lo
+	glm::vec3 vec, nVec;
+	vec = puntRebot - cen;
+	nVec = vec / (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+
+	//Definir components del pla
+	float pA, pB, pC, pD;
+	pA = puntRebot.x * nVec.x;
+	pB = puntRebot.y * nVec.y;
+	pC = puntRebot.z * nVec.z;
+	pD = pA + pB + pC;
+
+	//Trobar punt i velocitat despres de rebotar
+	//P = P' - 2 * (u * P' + d)u
+	resultat.resPos = pos - 2.f * (nVec.x * pos.x + nVec.y * pos.y + nVec.z * pos.z + pD) * nVec;
+	//V = V' - 2 * (u * V')u
+	resultat.resVel = vel - 2.f * (nVec.x * vel.x + nVec.y * vel.y + nVec.z * vel.z) * nVec;;
+
+	return resultat;
+}
+
+ParabolaSim::CollisionBounceResult CapsuleCollision(EulerStep s, Pastilla* c)
+{
+	ParabolaSim::CollisionBounceResult result;
+
+	//No és així, pero era per posar alguna cosa
+	result.resPos -= (result.resPos + result.resPos);
+	result.resVel -= (result.resVel + result.resVel);
+
+	return result;
+}
+
 void ParabolaSim::Update(float dt) 
 {
 	if (cascadeActive) {
@@ -49,6 +129,16 @@ void ParabolaSim::Update(float dt)
 				if (Plano::colisionPointPlane(&paredes[j], emiter1->GetParticlePosition(i)))
 				{
 					CollisionBounceResult res = PlaneCollisionMirror(step, &paredes[j]);
+					emiter1->UpdateParticle(i, res.resPos, res.resVel, emiter1->GetParticleAcceleration(i), 0);
+				}
+				else if (esfera->PointInsideSphere(emiter1->GetParticlePosition(i), esfera))
+				{
+					CollisionBounceResult res = SphereCollision(step, esfera);
+					emiter1->UpdateParticle(i, res.resPos, res.resVel, emiter1->GetParticleAcceleration(i), 0);
+				}
+				else if (pastilla->PointInsideCapsule(emiter1->GetParticlePosition(i), pastilla))
+				{
+					CollisionBounceResult res = CapsuleCollision(step, pastilla);
 					emiter1->UpdateParticle(i, res.resPos, res.resVel, emiter1->GetParticleAcceleration(i), 0);
 				}
 			}
@@ -73,11 +163,22 @@ void ParabolaSim::Update(float dt)
 					CollisionBounceResult res = PlaneCollisionMirror(step, &paredes[j]);
 					emiter2->UpdateParticle(i, res.resPos, res.resVel, emiter2->GetParticleAcceleration(i), 0);
 				}
+				else if (esfera->PointInsideSphere(emiter2->GetParticlePosition(i), esfera))
+				{
+					CollisionBounceResult res = SphereCollision(step, esfera);
+					emiter2->UpdateParticle(i, res.resPos, res.resVel, emiter2->GetParticleAcceleration(i), 0);
+				}
+				/*else if (pastilla->PointInsideCapsule(emiter2->GetParticlePosition(i), pastilla))
+				{
+					CollisionBounceResult res = CapsuleCollision(step, pastilla);
+					emiter2->UpdateParticle(i, res.resPos, res.resVel, emiter2->GetParticleAcceleration(i), 0);
+				}*/
 			}
 		}
 		emiter2->Update(dt);		
 	}
 }
+
 void ParabolaSim::RenderUpdate() 
 {	
 	emiter1->ToggleVisibility(cascadeActive);
@@ -90,6 +191,7 @@ void ParabolaSim::RenderUpdate()
 	if (sphereActive) esfera->Render();
 	if (capsuleActive) pastilla->Render();
 }
+
 void ParabolaSim::RenderGui() 
 {
 	ImGui::Checkbox("Cascada", &cascadeActive);

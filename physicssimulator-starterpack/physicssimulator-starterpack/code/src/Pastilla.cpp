@@ -37,3 +37,35 @@ void Pastilla::ToggleVisibility(bool val)
 {
 	capsulePrim->SetVisible(val);
 }
+
+bool Pastilla::PointInsideCapsule(glm::vec3 p, Pastilla* c)
+{
+	glm::vec3 puntProper, vectorPastilla, vectorDistancia, aux;
+	puntProper = p;
+	vectorPastilla = c->position2 - c->position1;
+	//Q' = A `clamp (((P'-A)*(B-A))/(B-A)^2, 0.1) * (B-A)
+	//CLAMP manual perque el glm::clamp i std::clamp no va
+	aux = ((puntProper - c->position1) * vectorPastilla)  / (vectorPastilla * vectorPastilla);
+	if (aux.x > 0.1f) aux.x = 0.1f; if (aux.x < -0.1f) aux.x = -0.1f;
+	if (aux.y > 0.1f) aux.y = 0.1f; if (aux.y < -0.1f) aux.y = -0.1f;
+	if (aux.z > 0.1f) aux.z = 0.1f; if (aux.z < -0.1f) aux.z = -0.1f;
+
+	vectorDistancia = c->position1 + aux * vectorPastilla;
+	float distancia = sqrt(vectorDistancia.x * vectorDistancia.x + vectorDistancia.y * vectorDistancia.y + vectorDistancia.z * vectorDistancia.z);
+	return distancia <= radius;
+}
+
+glm::vec3 Pastilla::GetPosition1()
+{
+	return position1;
+}
+
+glm::vec3 Pastilla::GetPosition2()
+{
+	return position2;
+}
+
+float Pastilla::GetRadius()
+{
+	return radius;
+}
