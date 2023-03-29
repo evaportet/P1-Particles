@@ -61,7 +61,7 @@ namespace graphics {
 
 	class MeshPrimitive : public Primitive {
 	public:
-		MeshPrimitive(Program& program, int rows, int cols, glm::vec4 color = glm::vec4(0.1f, 1.f, 1.f, 0.f));
+		MeshPrimitive(Program& program, int rows, int cols, glm::vec4 color = glm::vec4(0.8f, .1f, .1f, 0.f));
 		~MeshPrimitive();
 		void Update(const float* arrayData);
 		int GetRows();

@@ -3,11 +3,12 @@
 #include <cstdio>
 
 #include "Parabola.h"
-
+#include "AA3.h"
 
 #pragma region simulationSelection
 enum class EnabledSimulation {
 	PARABOLA,
+	AA3
 };
 
 Simulator* currentSimulator;
@@ -24,6 +25,10 @@ void setSimulation(EnabledSimulation simulation) {
 			printf("Start the random particles simulation\n");
 			currentSimulator = new ParabolaSim();
 			break;
+		case EnabledSimulation::AA3:
+			printf("Start the cloth simulation\n");
+			currentSimulator = new AA3();
+			break;
 	}
 }
 #pragma endregion
@@ -36,6 +41,7 @@ void GUI() {
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("Simulation")) {
 			if (ImGui::MenuItem("Parabola")) { setSimulation(EnabledSimulation::PARABOLA); };
+			if (ImGui::MenuItem("AA3")) { setSimulation(EnabledSimulation::AA3); };
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -56,8 +62,8 @@ void GUI() {
 
 void PhysicsInit() {
 	// The default simulation
-	currentSimulation = EnabledSimulation::PARABOLA;
-	currentSimulator = new ParabolaSim();
+	currentSimulation = EnabledSimulation::AA3;
+	currentSimulator = new AA3();
 }
 
 void PhysicsUpdate(float dt) {

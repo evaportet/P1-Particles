@@ -66,6 +66,9 @@
     <ClCompile Include="src\Parabola.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
+    <ClCompile Include="src\AA3.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderPrims.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="include\Parabola.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AA3.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
   </ItemGroup>
