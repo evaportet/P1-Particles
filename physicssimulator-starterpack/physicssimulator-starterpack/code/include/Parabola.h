@@ -1,35 +1,46 @@
 #pragma once
-#include <Simulator.h>
-#include <RenderPrims.h>
-#include <vector>
+#include<Emiter.h>
+#include<Cascada.h>
+#include "Plano.h"
+#include "EulerStep.h"
+#include<Font.h>
 #include "imgui/imgui.h"
+#include "Esfera.h"
+#include "Pastilla.h"
 
 class ParabolaSim : public Simulator {
 public:
+	
+	struct CollisionBounceResult
+	{
+		glm::vec3 resPos;
+		glm::vec3 resVel;
+	};
+	//CollisionBounceResult PlaneCollisionMirror(EulerStep s, Plano* p);
+
 	ParabolaSim();
 	~ParabolaSim();
 
 	void Update(float dt) override;
 	void RenderUpdate() override;
-	void RenderGui() override;
-	void EulerSolver(float dt);
+	void RenderGui() override;	
 
 private:
-	graphics::ParticlesPrimitive* particlesPrim;
-	float emissionRate = 100.0f;
-	float particleLife = 1.0f;
-	int nParticles = emissionRate * particleLife;
-	static const int nParts = 20;
-	
-	glm::vec3 positions[nParts];
-	glm::vec3 velocities[nParts];
-	//contenedor de acceleraciones para las colisiones
-	glm::vec3 accelerations[nParts];
+	bool cascadeActive;
+	bool fountainActive;
+	bool sphereActive;
+	bool capsuleActive;
 
-	int totalTime;
-
-	const int MIN_EMISSION_RATE = 100;
-	const int MAX_EMISSION_RATE = 1000;
-	const int MIN_LIFE = 1;
-	const int MAX_LIFE = 5;
+	Emiter* emiter1;
+	Emiter* emiter2;
+	Esfera* esfera;
+	Pastilla* pastilla;
+	Plano paredes[6] = {
+		Plano(glm::vec3(0.f), glm::vec3(0.f, 1.f, 0.f), 0.f),				//Terra
+		Plano(glm::vec3(0.f, 10.f, 0.f), glm::vec3(0.f, -1.f, 0.f), 10.f),	//Sostre
+		Plano(glm::vec3(5.f, 5.f, 0.f), glm::vec3(-1.f, 0.f, 0.f), 5.f),	//Dreta
+		Plano(glm::vec3(-5.f, 5.f, 0.f), glm::vec3(1.f, 0.f, 0.f), 5.f),	//Esquerra
+		Plano(glm::vec3(0.f, 5.f, -5.f), glm::vec3(0.f, 0.f, -1.f), 5.f),	//Fondo
+		Plano(glm::vec3(0.f, 5.f, 5.f), glm::vec3(0.f, 0.f, 1.f), 5.f)		//Proxim
+	};
 };

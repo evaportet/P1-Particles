@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -138,10 +138,16 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClCompile Include="include\imgui\imgui_demo.cpp" />
     <ClCompile Include="include\imgui\imgui_draw.cpp" />
     <ClCompile Include="include\imgui\imgui_impl_sdl_gl3.cpp" />
+    <ClCompile Include="Plano.cpp" />
     <ClCompile Include="src\AA3.cpp" />
     <ClCompile Include="src\Buffers.cpp" />
+    <ClCompile Include="src\Cascada.cpp" />
+    <ClCompile Include="src\Emiter.cpp" />
+    <ClCompile Include="src\Esfera.cpp" />
+    <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Parabola.cpp" />
+    <ClCompile Include="src\Pastilla.cpp" />
     <ClCompile Include="src\PrimitiveManager.cpp" />
     <ClCompile Include="src\physics.cpp" />
     <ClCompile Include="src\render.cpp" />
@@ -151,7 +157,14 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
   <ItemGroup>
     <ClInclude Include="include\AA3.h" />
     <ClInclude Include="include\Buffers.h" />
+    <ClInclude Include="include\Cascada.h" />
+    <ClInclude Include="include\Emiter.h" />
+    <ClInclude Include="include\Esfera.h" />
+    <ClInclude Include="include\EulerStep.h" />
+    <ClInclude Include="include\Font.h" />
     <ClInclude Include="include\Parabola.h" />
+    <ClInclude Include="include\Pastilla.h" />
+    <ClInclude Include="include\Plano.h" />
     <ClInclude Include="include\PrimitiveManager.h" />
     <ClInclude Include="include\RenderPrims.h" />
     <ClInclude Include="include\Program.h" />
