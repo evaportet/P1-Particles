@@ -140,8 +140,10 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClCompile Include="include\imgui\imgui_impl_sdl_gl3.cpp" />
     <ClCompile Include="Plano.cpp" />
     <ClCompile Include="src\AA3.cpp" />
+    <ClCompile Include="src\AA4.cpp" />
     <ClCompile Include="src\Buffers.cpp" />
     <ClCompile Include="src\Cascada.cpp" />
+    <ClCompile Include="src\Cub.cpp" />
     <ClCompile Include="src\Emiter.cpp" />
     <ClCompile Include="src\Esfera.cpp" />
     <ClCompile Include="src\Font.cpp" />
@@ -153,11 +155,14 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClCompile Include="src\render.cpp" />
     <ClCompile Include="src\RenderPrims.cpp" />
     <ClCompile Include="src\Program.cpp" />
+    <ClCompile Include="src\Tela.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AA3.h" />
+    <ClInclude Include="include\AA4.h" />
     <ClInclude Include="include\Buffers.h" />
     <ClInclude Include="include\Cascada.h" />
+    <ClInclude Include="include\Cub.h" />
     <ClInclude Include="include\Emiter.h" />
     <ClInclude Include="include\Esfera.h" />
     <ClInclude Include="include\EulerStep.h" />
@@ -168,6 +173,7 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClInclude Include="include\PrimitiveManager.h" />
     <ClInclude Include="include\RenderPrims.h" />
     <ClInclude Include="include\Program.h" />
+    <ClInclude Include="include\Tela.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Axis.fs" />

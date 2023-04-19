@@ -2,13 +2,15 @@
 #include <imgui\imgui_impl_sdl_gl3.h>
 #include <cstdio>
 
-#include "Parabola.h"
+#include "Parabola.h" //AA2
 #include "AA3.h"
+#include "AA4.h"
 
 #pragma region simulationSelection
 enum class EnabledSimulation {
 	PARABOLA,
-	AA3
+	AA3,
+	AA4
 };
 
 Simulator* currentSimulator;
@@ -29,6 +31,10 @@ void setSimulation(EnabledSimulation simulation) {
 			printf("Start the cloth simulation\n");
 			currentSimulator = new AA3();
 			break;
+		case EnabledSimulation::AA4:
+			printf("Start the AA4 simulation\n");
+			currentSimulator = new AA4();
+			break;
 	}
 }
 #pragma endregion
@@ -40,8 +46,9 @@ void GUI() {
 	
 	if (ImGui::BeginMainMenuBar()) {
 		if (ImGui::BeginMenu("Simulation")) {
-			if (ImGui::MenuItem("Parabola")) { setSimulation(EnabledSimulation::PARABOLA); };
-			if (ImGui::MenuItem("AA3")) { setSimulation(EnabledSimulation::AA3); };
+			if (ImGui::MenuItem("AA2: Particles")) { setSimulation(EnabledSimulation::PARABOLA); };
+			if (ImGui::MenuItem("AA3: Cloth")) { setSimulation(EnabledSimulation::AA3); };
+			if (ImGui::MenuItem("AA4: Rigidbody")) { setSimulation(EnabledSimulation::AA4); };
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -62,8 +69,8 @@ void GUI() {
 
 void PhysicsInit() {
 	// The default simulation
-	currentSimulation = EnabledSimulation::AA3;
-	currentSimulator = new AA3();
+	currentSimulation = EnabledSimulation::AA4;
+	currentSimulator = new AA4();
 }
 
 void PhysicsUpdate(float dt) {
