@@ -10,12 +10,12 @@ public:
 	AA3();
 	~AA3();
 	//Inherited via Simualtor
-	void Update(float dt) override {};
+	void Update(float dt) override;
 	void RenderUpdate() override;
 	void RenderGui() override;
 private:
 	Tela* tela;
 	int rows, cols;
-	float startX, startY, distance;
+	float startX, startZ, distance;
 };
 
