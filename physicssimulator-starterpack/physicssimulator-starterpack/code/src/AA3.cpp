@@ -4,15 +4,20 @@ AA3::AA3()
 {
 	rows = 18;
 	cols = 14;
-	startX = -4.0f;
-	startY = 10.0f;
+	startX = -2.5f;
+	startZ = 2.f;
 	distance = 0.4f;
-	tela = new Tela(rows, cols, startX, startY, distance);
+	tela = new Tela(rows, cols, startX, startZ, distance);
 }
 
 AA3::~AA3()
 {
 	delete tela;
+}
+
+void AA3::Update(float dt)
+{
+	tela->Update(dt);
 }
 
 void AA3::RenderUpdate()
