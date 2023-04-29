@@ -148,6 +148,7 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClCompile Include="src\Esfera.cpp" />
     <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Molla.cpp" />
     <ClCompile Include="src\Parabola.cpp" />
     <ClCompile Include="src\Pastilla.cpp" />
     <ClCompile Include="src\PrimitiveManager.cpp" />
@@ -167,6 +168,7 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClInclude Include="include\Esfera.h" />
     <ClInclude Include="include\EulerStep.h" />
     <ClInclude Include="include\Font.h" />
+    <ClInclude Include="include\Molla.h" />
     <ClInclude Include="include\Parabola.h" />
     <ClInclude Include="include\Pastilla.h" />
     <ClInclude Include="include\Plano.h" />
@@ -174,6 +176,7 @@ xcopy $(ProjectDir)libs\SDL2.dll $(OutDir) /y /d</Command>
     <ClInclude Include="include\RenderPrims.h" />
     <ClInclude Include="include\Program.h" />
     <ClInclude Include="include\Tela.h" />
+    <ClInclude Include="include\VerletStep.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Axis.fs" />

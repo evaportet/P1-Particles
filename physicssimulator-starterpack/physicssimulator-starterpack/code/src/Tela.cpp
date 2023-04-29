@@ -31,7 +31,7 @@ void Tela::Update(float dt)
 {
 	for (int i = 0; i < positions.size(); i++)
 	{
-		EulerStep step = EulerStep::DoStep(
+		VerletStep step = VerletStep::DoStep(
 			positions[i],
 			velocities[i],
 			accelerations[i],
@@ -51,5 +51,5 @@ void Tela::RenderUpdate()
 
 void Tela::RenderGui()
 {
-	ImGui::SliderFloat("Separació Punts", &distance, MIN_DIST, MAX_DIST);
+	ImGui::SliderFloat("SeparaciEPunts", &distance, MIN_DIST, MAX_DIST);
 }

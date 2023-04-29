@@ -1,6 +1,7 @@
 #pragma once
 #include <PrimitiveManager.h>
 #include <EulerStep.h>
+#include <VerletStep.h>
 #include <vector>
 #include "imgui/imgui.h"
 
@@ -23,6 +24,7 @@ private:
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec3> velocities;
 	std::vector<glm::vec3> accelerations;
+	std::vector<float> masses;
 
 
 	const float MAX_DIST = 5.0f;
