@@ -18,8 +18,6 @@ Tela::Tela(int rows, int cols, float startX, float startZ, float dist, float ela
 			positions.emplace_back(x, 9.f, z);
 			velocities.emplace_back(0.f, 0.f, 0.f);
 			accelerations.emplace_back(gravity);
-			posX.emplace_back(j);
-			posY.emplace_back(i);
 		}
 	}
 
@@ -28,23 +26,25 @@ Tela::Tela(int rows, int cols, float startX, float startZ, float dist, float ela
 	{
 		for (int j = 0; j < cols; j++)
 		{
+			int currentPosInMatrix = (i * rows) + j;
+
 			//Structural
-			if (j < cols - 1)
-				structural.emplace_back(elast, damp, positions[i][j], positions[i][j + 1]);
-			if (i < rows - 1)
-				structural.emplace_back(elast, damp, positions[i][j], positions[i + 1][j]);
+			if (j < cols - 1) 
+				structural.emplace_back(elast, damp, positions[currentPosInMatrix], positions[currentPosInMatrix + 1]);
+			if (i < rows - 1) 
+				structural.emplace_back(elast, damp, positions[currentPosInMatrix], positions[currentPosInMatrix + cols]);
 
 			//Shear
-			if (j < cols - 1 && i < rows - 1)
-				structural.emplace_back(elast, damp, positions[i][j], positions[i + 1][j + 1]);
-			if (j < cols - 1 && i > 0)
-				structural.emplace_back(elast, damp, positions[i][j], positions[i - 1][j + 1]);
+			if (j < cols - 1 && i < rows - 1) 
+				structural.emplace_back(elast, damp, positions[currentPosInMatrix], positions[currentPosInMatrix + cols + 1]);
+			if (j < cols - 1 && i > 0) 
+				structural.emplace_back(elast, damp, positions[currentPosInMatrix], positions[currentPosInMatrix - cols + 1]);
 
 			//Bending
-			if (j < cols - 2)
-				structural.emplace_back(elast, damp, positions[i][j], positions[i][j + 2]);
-			if (i < rows - 2)
-				structural.emplace_back(elast, damp, positions[i][j], positions[i + 2][j]);
+			if (j < cols - 2) 
+				structural.emplace_back(elast, damp, positions[currentPosInMatrix], positions[currentPosInMatrix + 2]);
+			if (i < rows - 2) 
+				structural.emplace_back(elast, damp, positions[currentPosInMatrix], positions[currentPosInMatrix + (cols * 2)]);
 		}
 	}
 }

@@ -29,9 +29,6 @@ private:
 	std::vector<glm::vec3> velocities;
 	std::vector<glm::vec3> accelerations;
 
-	std::vector<int> posX;
-	std::vector<int> posY;
-
 	std::vector<Molla> structural;
 	std::vector<Molla> shear;
 	std::vector<Molla> bending;
