@@ -1,6 +1,6 @@
 #include "Tela.h"
 
-Tela::Tela(int rows, int cols, float startX, float startZ, float dist)
+Tela::Tela(int rows, int cols, float startX, float startZ, float dist, float elast, float damp)
 {
 	this->rows = rows;
 	this->cols = cols;
@@ -18,6 +18,33 @@ Tela::Tela(int rows, int cols, float startX, float startZ, float dist)
 			positions.emplace_back(x, 9.f, z);
 			velocities.emplace_back(0.f, 0.f, 0.f);
 			accelerations.emplace_back(gravity);
+			posX.emplace_back(j);
+			posY.emplace_back(i);
+		}
+	}
+
+	// Molles
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			//Structural
+			if (j < cols - 1)
+				structural.emplace_back(elast, damp, positions[i][j], positions[i][j + 1]);
+			if (i < rows - 1)
+				structural.emplace_back(elast, damp, positions[i][j], positions[i + 1][j]);
+
+			//Shear
+			if (j < cols - 1 && i < rows - 1)
+				structural.emplace_back(elast, damp, positions[i][j], positions[i + 1][j + 1]);
+			if (j < cols - 1 && i > 0)
+				structural.emplace_back(elast, damp, positions[i][j], positions[i - 1][j + 1]);
+
+			//Bending
+			if (j < cols - 2)
+				structural.emplace_back(elast, damp, positions[i][j], positions[i][j + 2]);
+			if (i < rows - 2)
+				structural.emplace_back(elast, damp, positions[i][j], positions[i + 2][j]);
 		}
 	}
 }
@@ -42,6 +69,8 @@ void Tela::Update(float dt)
 		velocities[i] = step.endVel;
 		//accelerations[i] = accelerations[i];
 	}
+
+	UpdateMesh();
 }
 
 void Tela::RenderUpdate()
@@ -52,4 +81,14 @@ void Tela::RenderUpdate()
 void Tela::RenderGui()
 {
 	ImGui::SliderFloat("SeparaciEPunts", &distance, MIN_DIST, MAX_DIST);
+}
+
+void Tela::UpdateMesh()
+{
+	AddForces();
+}
+
+void Tela::AddForces()
+{
+
 }
