@@ -6,11 +6,19 @@ AA4::AA4()
 
 	linVel = { 0, 0, 0 };
 	angVel = { 0, 0, 0 };
+
 	inertia = glm::mat3(0);
+
+	acceleration = { 0, 0, 0 };
 
 	mass = 1;
 
-	cub = new Cub(objMat);
+	state.pos;
+	state.rotation;
+	state.linMom;
+	state.angMom;
+
+	cub = new Cub(objMat, linVel, angVel, inertia, acceleration, mass, state);
 }
 
 AA4::~AA4()

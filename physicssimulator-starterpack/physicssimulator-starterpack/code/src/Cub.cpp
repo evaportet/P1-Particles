@@ -1,10 +1,14 @@
 #include "Cub.h"
 
-Cub::Cub(glm::mat4 objMat)
+Cub::Cub(glm::mat4 objMat, glm::vec3 linVel, glm::vec3 angVel, glm::mat3 inertia, glm::vec3 acceleration, float mass, CubeState state)
 {
 	this->objMat = objMat;
-	rotMat = glm::mat3(0);
-	angVel = {0, 0, 0};
+	this->linVel = linVel;
+	this->angVel = angVel;
+	this->inertia = inertia;
+	this->acceleration = acceleration;
+	this->mass = mass;
+	this->state = state;
 	cube = manager.NewCube(this->objMat);
 }
 
@@ -15,8 +19,7 @@ Cub::~Cub()
 
 void Cub::Update(float dt)
 {
-	/*glm::mat3 angVelMat = glm::mat3(glm::vec3(0, -angVel.z, angVel.y), glm::vec3(angVel.z,  0, -angVel.x), glm::vec3(-angVel.y, angVel.z, 0));
-	rotMat = rotMat + dt * (angVelMat * rotMat);*/
+
 }
 
 void Cub::RenderUpdate()

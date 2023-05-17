@@ -2,14 +2,6 @@
 #include "Simulator.h"
 #include "Cub.h"
 
-struct CubeState
-{
-	glm::vec3 pos;
-	glm::quat rotation;
-	glm::vec3 linMom;
-	glm::vec3 angMom;
-};
-
 class AA4 : public Simulator
 {
 public:
@@ -28,6 +20,8 @@ private:
 	glm::vec3 angVel;
 
 	glm::mat3 inertia;
+
+	glm::vec3 acceleration;
 
 	float mass;
 };
