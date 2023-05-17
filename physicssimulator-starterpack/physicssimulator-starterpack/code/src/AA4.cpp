@@ -13,10 +13,12 @@ AA4::AA4()
 
 	mass = 1;
 
-	state.pos;
-	state.rotation;
-	state.linMom;
-	state.angMom;
+	state.pos = {0, 0, 0};
+	state.rotation = {	
+						
+						};
+	state.linMom = {0, 0, 0};
+	state.angMom = {0, 0, 0};
 
 	cub = new Cub(objMat, linVel, angVel, inertia, acceleration, mass, state);
 }
