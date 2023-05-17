@@ -69,8 +69,8 @@ void GUI() {
 
 void PhysicsInit() {
 	// The default simulation
-	currentSimulation = EnabledSimulation::AA3;
-	currentSimulator = new AA3();
+	currentSimulation = EnabledSimulation::AA4;
+	currentSimulator = new AA4();
 }
 
 void PhysicsUpdate(float dt) {

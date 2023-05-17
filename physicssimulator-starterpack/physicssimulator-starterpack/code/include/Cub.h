@@ -8,7 +8,7 @@ extern graphics::PrimitiveManager manager;
 class Cub
 {
 public:
-	Cub(glm::mat4 objMat, glm::mat3 rotMat, glm::vec3 angVel);
+	Cub(glm::mat4 objMat);
 	~Cub();
 	void Update(float dt);
 	void RenderUpdate();

@@ -2,6 +2,14 @@
 #include "Simulator.h"
 #include "Cub.h"
 
+struct CubeState
+{
+	glm::vec3 pos;
+	glm::quat rotation;
+	glm::vec3 linMom;
+	glm::vec3 angMom;
+};
+
 class AA4 : public Simulator
 {
 public:
@@ -12,12 +20,15 @@ public:
 	void RenderGui();
 private:
 	Cub* cub;
-	glm::mat4 objMat;
-	glm::mat3 rotMat;
+	CubeState state;
 
+	glm::mat4 objMat;
+
+	glm::vec3 linVel;
 	glm::vec3 angVel;
 
-	//Euler Angles
-	float roll, pitch, yaw;
+	glm::mat3 inertia;
+
+	float mass;
 };
 
