@@ -19,14 +19,23 @@ Cub::~Cub()
 
 void Cub::Update(float dt)
 {
+	EulerStep step = EulerStep::DoStep(state.pos, linVel, acceleration, dt);
 
+	state.pos = step.endPos;
+	linVel = step.endVel;
+
+	objMat = glm::translate(glm::mat4(1.0f), state.pos); // Update the object matrix based on the new position
+
+	// Apply the updated object matrix to the cube primitive
+	cube->Update(objMat);
 }
 
 void Cub::RenderUpdate()
 {
-	cube->Update(objMat);
+	// No changes needed in this method
 }
 
 void Cub::RenderGui()
 {
+	// No changes needed in this method
 }

@@ -1,4 +1,4 @@
-#include "Tela.h"
+﻿#include "Tela.h"
 
 Tela::Tela(int rows, int cols, float startX, float startZ, float dist)
 {
@@ -51,5 +51,5 @@ void Tela::RenderUpdate()
 
 void Tela::RenderGui()
 {
-	ImGui::SliderFloat("Separaci� Punts", &distance, MIN_DIST, MAX_DIST);
+	ImGui::SliderFloat("SeparacióPunts", &distance, MIN_DIST, MAX_DIST);
 }
