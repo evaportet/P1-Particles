@@ -24,8 +24,13 @@ void Cub::Update(float dt)
 
 	state.pos = step.endPos;
 	linVel = step.endVel;
+	glm::vec3 linMom = linVel * mass;
+	glm::vec3 angMom = angVel * inertia;
 
-	objMat = glm::translate(glm::mat4(1.0f), state.pos); // Update the object matrix based on the new position
+	state.rotation += 0.5f * dt * glm::quat(0.0f, angVel) * state.rotation;
+	state.rotation = glm::normalize(state.rotation);
+
+	objMat = glm::translate(glm::mat4(1.0f), state.pos) * (glm::mat4)state.rotation; // Update the object matrix based on the new position
 
 	// Apply the updated object matrix to the cube primitive
 	cube->Update(objMat);

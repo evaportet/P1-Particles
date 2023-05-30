@@ -5,7 +5,7 @@ AA4::AA4()
 {
 	objMat = glm::mat4(1.0f);
 	linVel = { 0, 5.0f, 0 };
-	angVel = { 0, 0, 0 };
+	angVel = { 1.0f, 0, 0 };
 	inertia = glm::mat3(0);
 	acceleration = { 0, -9.81f, 0 };
 	mass = 1;
