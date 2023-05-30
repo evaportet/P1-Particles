@@ -1,3 +1,4 @@
+//Cub.cpp
 #include "Cub.h"
 
 Cub::Cub(glm::mat4 objMat, glm::vec3 linVel, glm::vec3 angVel, glm::mat3 inertia, glm::vec3 acceleration, float mass, CubeState state)
