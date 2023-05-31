@@ -1,4 +1,3 @@
-//EulerStep.h
 #pragma once
 #include <glm/glm.hpp>
 

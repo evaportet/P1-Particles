@@ -1,4 +1,3 @@
-//Cub.cpp
 #include "Cub.h"
 
 Cub::Cub(glm::mat4 objMat, glm::vec3 linVel, glm::vec3 angVel, glm::mat3 inertia, glm::vec3 acceleration, float mass, CubeState state)
@@ -30,18 +29,17 @@ void Cub::Update(float dt)
 	state.rotation += 0.5f * dt * glm::quat(0.0f, angVel) * state.rotation;
 	state.rotation = glm::normalize(state.rotation);
 
-	objMat = glm::translate(glm::mat4(1.0f), state.pos) * (glm::mat4)state.rotation; // Update the object matrix based on the new position
+	objMat = glm::translate(glm::mat4(1.0f), state.pos) * (glm::mat4)state.rotation;
 
-	// Apply the updated object matrix to the cube primitive
 	cube->Update(objMat);
 }
 
 void Cub::RenderUpdate()
 {
-	// No changes needed in this method
+	
 }
 
 void Cub::RenderGui()
 {
-	// No changes needed in this method
+	
 }

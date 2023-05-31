@@ -1,4 +1,3 @@
-//AA4.cpp
 #include "AA4.h"
 
 AA4::AA4()
@@ -10,7 +9,7 @@ AA4::AA4()
 	acceleration = { 0, -9.81f, 0 };
 	mass = 1;
 	state.pos = { 0, 0, 0 };
-	state.rotation = glm::quat(); // Initialize with identity rotation
+	state.rotation = glm::quat();
 	state.linMom = { 0, 0, 0 };
 	state.angMom = { 0, 0, 0 };
 	cub = new Cub(objMat, linVel, angVel, inertia, acceleration, mass, state);
