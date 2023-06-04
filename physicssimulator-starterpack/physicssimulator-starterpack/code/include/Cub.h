@@ -23,7 +23,7 @@ public:
 	void Update(float dt);
 	void RenderUpdate();
 	void RenderGui();
-	float GetRandomNumber();
+	glm::vec3 GetPosition();
 
 private:
 	graphics::CubePrimitive* cube;

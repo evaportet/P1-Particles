@@ -43,3 +43,8 @@ void Cub::RenderGui()
 {
 	
 }
+
+glm::vec3 Cub::GetPosition()
+{
+	return state.pos;
+}

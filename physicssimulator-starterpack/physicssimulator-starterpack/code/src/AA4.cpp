@@ -4,6 +4,7 @@ AA4::AA4()
 {
 	maxTime = 15;
 	currentTime = 0;
+	hasCollided = false;
 	InitCube();
 }
 
@@ -16,11 +17,22 @@ void AA4::Update(float dt)
 {
 	currentTime += 0.1f;
 	cub->Update(dt);
+
+	for (int j = 0; j < 6; j++)
+	{
+		if (Plano::colisionPointPlane(&paredes[j], cub->GetPosition()) && !hasCollided)
+		{
+			printf("COLLIDED");
+			hasCollided = true;
+		}
+	}
+
 	if (currentTime >= maxTime)
 	{
 		delete cub;
 		InitCube();
 		currentTime = 0;
+		hasCollided = false;
 	}
 }
 
