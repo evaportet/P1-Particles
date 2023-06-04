@@ -2,17 +2,9 @@
 
 AA4::AA4()
 {
-	objMat = glm::mat4(1.0f);
-	linVel = { 0, 5.0f, 0 };
-	angVel = { 1.0f, 0, 0 };
-	inertia = glm::mat3(0);
-	acceleration = { 0, -9.81f, 0 };
-	mass = 1;
-	state.pos = { 0, 0, 0 };
-	state.rotation = glm::quat();
-	state.linMom = { 0, 0, 0 };
-	state.angMom = { 0, 0, 0 };
-	cub = new Cub(objMat, linVel, angVel, inertia, acceleration, mass, state);
+	maxTime = 15;
+	currentTime = 0;
+	InitCube();
 }
 
 AA4::~AA4()
@@ -22,7 +14,14 @@ AA4::~AA4()
 
 void AA4::Update(float dt)
 {
+	currentTime += 0.1f;
 	cub->Update(dt);
+	if (currentTime >= maxTime)
+	{
+		delete cub;
+		InitCube();
+		currentTime = 0;
+	}
 }
 
 void AA4::RenderUpdate()
@@ -33,4 +32,25 @@ void AA4::RenderUpdate()
 void AA4::RenderGui()
 {
 	cub->RenderGui();
+}
+
+void AA4::InitCube()
+{
+	objMat = glm::mat4(1.0f);
+	linVel = { GetRandomNumber(), GetRandomNumber(), GetRandomNumber() };
+	angVel = { GetRandomNumber(), GetRandomNumber(), GetRandomNumber() };
+	inertia = glm::mat3(0);
+	acceleration = { 0, -9.81f, 0 };
+	mass = 1;
+	state.pos = { 0, 5, 0 };
+	state.rotation = glm::quat();
+	state.linMom = { 0, 0, 0 };
+	state.angMom = { 0, 0, 0 };
+	cub = new Cub(objMat, linVel, angVel, inertia, acceleration, mass, state);
+}
+
+float AA4::GetRandomNumber()
+{
+	srand(time(NULL));
+	return rand() % 5;
 }

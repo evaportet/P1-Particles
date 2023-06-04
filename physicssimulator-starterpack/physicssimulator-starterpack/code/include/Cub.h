@@ -23,6 +23,7 @@ public:
 	void Update(float dt);
 	void RenderUpdate();
 	void RenderGui();
+	float GetRandomNumber();
 
 private:
 	graphics::CubePrimitive* cube;

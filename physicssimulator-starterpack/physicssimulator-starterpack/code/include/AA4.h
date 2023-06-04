@@ -1,7 +1,9 @@
 #pragma once
-
 #include "Simulator.h"
 #include "Cub.h"
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 class AA4 : public Simulator
 {
@@ -12,6 +14,9 @@ public:
 	void RenderUpdate();
 	void RenderGui();
 
+	void InitCube();
+	float GetRandomNumber();
+
 private:
 	Cub* cub;
 	CubeState state;
@@ -21,4 +26,7 @@ private:
 	glm::mat3 inertia;
 	glm::vec3 acceleration;
 	float mass;
+
+	float currentTime;
+	float maxTime;
 };
