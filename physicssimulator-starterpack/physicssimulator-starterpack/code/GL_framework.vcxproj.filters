@@ -102,11 +102,11 @@
     <ClCompile Include="src\Tela.cpp">
       <Filter>Source Files\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="AA5.cpp">
-      <Filter>Source Files\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Maya.cpp">
+    <ClCompile Include="src\Maya.cpp">
       <Filter>Source Files\Primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AA5.cpp">
+      <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +158,10 @@
     <ClInclude Include="include\Tela.h">
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
-    <ClInclude Include="AA5.h">
+    <ClInclude Include="include\AA5.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Maya.h">
+    <ClInclude Include="include\Maya.h">
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
   </ItemGroup>
