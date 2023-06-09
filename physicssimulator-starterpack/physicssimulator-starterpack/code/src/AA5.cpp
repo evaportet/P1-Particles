@@ -10,7 +10,7 @@ AA5::AA5()
 
 	
 	a = 0.3f;
-	wavelenght = 7.f;
+	wavelenght = 2.f;
 	freq = 3.5f;
 	phi = 3.9f;
 
@@ -18,8 +18,8 @@ AA5::AA5()
 	distance = 0.4f;
 
 	olas.push_back(new Malla(rows, cols, startX, startY, startZ, a, wavelenght, freq, phi, amplitude, distance));
-	olas.push_back(new Malla(rows, cols, startX, startY, startZ, 0.5f, 9.f, 4.f, 4.2f, amplitude, distance));
-	olas.push_back(new Malla(rows, cols, startX, startY, startZ, 0.1f, 5.f, 3.f, 3.5f, amplitude, distance));
+	olas.push_back(new Malla(rows, cols, startX, 1.5f, startZ, 0.5f, 3.f, 4.f, 4.2f, amplitude, distance));
+	olas.push_back(new Malla(rows, cols, startX, 2.f, startZ, 0.1f, 1.f, 3.f, 3.5f, amplitude, distance));
 }
 
 AA5::~AA5()

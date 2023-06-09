@@ -20,6 +20,8 @@ private:
 	float startX, startY, startZ, a, wavelenght, freq, phi, amplitude, distance;
 	float k;
 
+	glm::vec3 direction;
+
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec3> velocities;
 	std::vector<glm::vec3> accelerations;

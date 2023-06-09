@@ -28,7 +28,8 @@ Malla::Malla(int rows, int cols, float startX, float startY, float startZ, float
 	}
 	
 	//Gerstner waves
-	k = 2 * glm::pi<float>() / wavelenght;
+	k = 2 * glm::pi<float>() / wavelenght; 
+	direction = glm::vec3(0.05f, 0.f, 0.f);
 }
 
 Malla::~Malla()
@@ -38,23 +39,21 @@ Malla::~Malla()
 
 void Malla::Update(float dt)
 {
-	for (int i = 0; i < positions.size(); i++)
-	{
-		EulerStep step = EulerStep::DoStep(
-			positions[i],
-			velocities[i],
-			accelerations[i],
-			dt
-		);
-
+	/*for (int i = 0; i < positions.size(); i++)
+	{*/
 		//Gerstner waves	
-		positions[i].x = startX - amplitude * glm::sin(k * startX - freq * dt + phi);
-		positions[i].y = amplitude * glm::cos(k * startX - freq * dt + phi);
+		//positions[i].x = startX - amplitude * glm::sin(k * startX - (freq * dt) + phi);
+		//positions[i].y = amplitude * glm::cos(k * startX - (freq * dt) + phi);
+		//positions[i].z = startZ - amplitude * glm::sin(k * startZ - (freq * dt) + phi);
 
-		positions[i] = step.endPos;
-		velocities[i] = step.endVel;
-		//accelerations[i] = accelerations[i];
-	}
+		//glm::vec3 position = direction * amplitude * glm::sin(glm::dot(direction, glm::vec3(startX, startY, startZ)) - (freq * dt) + phi);
+		//position.y = amplitude * glm::cos(glm::dot(direction, glm::vec3(startX, startY, startZ)) - (freq * dt) + phi);
+
+		glm::vec3 position = direction * amplitude * glm::sin(glm::dot(direction, positions[0]) - (freq * dt) + phi);
+		position.y = amplitude * glm::cos(glm::dot(direction, positions[0]) - (freq * dt) + phi);
+
+		positions[0] = position;
+	//}
 }
 
 void Malla::RenderUpdate()
@@ -64,5 +63,5 @@ void Malla::RenderUpdate()
 
 void Malla::RenderGui()
 {
-	ImGui::SliderFloat("Separacio Punts", &distance, MIN_DIST, MAX_DIST);
+	//ImGui::SliderFloat("Separacio Punts", &distance, MIN_DIST, MAX_DIST);
 }
