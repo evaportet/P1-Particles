@@ -26,7 +26,6 @@ private:
 	std::vector<glm::vec3> velocities;
 	std::vector<glm::vec3> accelerations;
 
-
 	const float MAX_DIST = 5.0f;
 	const float MIN_DIST = 0.0f;
 };
