@@ -5,27 +5,51 @@ AA5::AA5()
 	rows = 18;
 	cols = 14;
 	startX = -2.5f;
+	startY = 1.f;
 	startZ = 2.f;
+
+	
+	a = 0.3f;
+	wavelenght = 7.f;
+	freq = 3.5f;
+	phi = 3.9f;
+
+	amplitude = 3.f;
 	distance = 0.4f;
-	maya = new Maya(rows, cols, startX, startZ, distance);
+
+	olas.push_back(new Malla(rows, cols, startX, startY, startZ, a, wavelenght, freq, phi, amplitude, distance));
+	olas.push_back(new Malla(rows, cols, startX, startY, startZ, 0.5f, 9.f, 4.f, 4.2f, amplitude, distance));
+	olas.push_back(new Malla(rows, cols, startX, startY, startZ, 0.1f, 5.f, 3.f, 3.5f, amplitude, distance));
 }
 
 AA5::~AA5()
 {
-	delete maya;
+	for (int i = 0; i < olas.size(); i++)
+	{
+		delete olas[i];
+	}
 }
 
 void AA5::Update(float dt)
 {
-	maya->Update(dt);
+	for (int i = 0; i < olas.size(); i++)
+	{ 
+		olas[i]->Update(dt);
+	}
 }
 
 void AA5::RenderUpdate()
 {
-	maya->RenderUpdate();
+	for (int i = 0; i < olas.size(); i++)
+	{
+		olas[i]->RenderUpdate();
+	}
 }
 
 void AA5::RenderGui()
 {
-	maya->RenderGui();
+	for (int i = 0; i < olas.size(); i++)
+	{
+		olas[i]->RenderGui();
+	}
 }

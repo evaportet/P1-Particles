@@ -5,12 +5,14 @@
 #include "Parabola.h" //AA2
 #include "AA3.h"
 #include "AA4.h"
+#include "AA5.h"
 
 #pragma region simulationSelection
 enum class EnabledSimulation {
 	PARABOLA,
 	AA3,
-	AA4
+	AA4,
+	AA5
 };
 
 Simulator* currentSimulator;
@@ -35,6 +37,10 @@ void setSimulation(EnabledSimulation simulation) {
 			printf("Start the AA4 simulation\n");
 			currentSimulator = new AA4();
 			break;
+		case EnabledSimulation::AA5:
+			printf("Start the AA5 simulation\n");
+			currentSimulator = new AA5();
+			break;
 	}
 }
 #pragma endregion
@@ -49,6 +55,7 @@ void GUI() {
 			if (ImGui::MenuItem("AA2: Particles")) { setSimulation(EnabledSimulation::PARABOLA); };
 			if (ImGui::MenuItem("AA3: Cloth")) { setSimulation(EnabledSimulation::AA3); };
 			if (ImGui::MenuItem("AA4: Rigidbody")) { setSimulation(EnabledSimulation::AA4); };
+			if (ImGui::MenuItem("AA5: Fluids")) { setSimulation(EnabledSimulation::AA5); };
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -70,7 +77,7 @@ void GUI() {
 void PhysicsInit() {
 	// The default simulation
 	currentSimulation = EnabledSimulation::AA4;
-	currentSimulator = new AA4();
+	currentSimulator = new AA5();
 }
 
 void PhysicsUpdate(float dt) {

@@ -78,9 +78,6 @@
     <ClCompile Include="src\AA4.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Plano.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Esfera.cpp">
       <Filter>Source Files\Primitives</Filter>
     </ClCompile>
@@ -102,11 +99,14 @@
     <ClCompile Include="src\Tela.cpp">
       <Filter>Source Files\Primitives</Filter>
     </ClCompile>
-    <ClCompile Include="src\Maya.cpp">
+    <ClCompile Include="src\Malla.cpp">
       <Filter>Source Files\Primitives</Filter>
     </ClCompile>
     <ClCompile Include="src\AA5.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plano.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,7 +161,7 @@
     <ClInclude Include="include\AA5.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="include\Maya.h">
+    <ClInclude Include="include\Malla.h">
       <Filter>Header Files\Primitives</Filter>
     </ClInclude>
   </ItemGroup>

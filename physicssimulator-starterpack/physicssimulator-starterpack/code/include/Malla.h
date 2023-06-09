@@ -6,19 +6,19 @@
 
 extern graphics::PrimitiveManager manager;
 
-class Maya
+class Malla
 {
 public:
-	Maya(int rows, int cols, float startX, float startZ, float dist);
-	~Maya();
+	Malla(int rows, int cols, float startX, float startY, float startZ, float a, float wavelenght, float freq, float phi, float amplitude, float dist);
+	~Malla();
 	void Update(float dt);
 	void RenderUpdate();
 	void RenderGui();
 private:
 	graphics::MeshPrimitive* mesh;
 	int rows, cols;
-	float startX, startZ, distance;
-	glm::vec3 gravity = glm::vec3(0.f, -9.81f, 0.f);
+	float startX, startY, startZ, a, wavelenght, freq, phi, amplitude, distance;
+	float k;
 
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec3> velocities;

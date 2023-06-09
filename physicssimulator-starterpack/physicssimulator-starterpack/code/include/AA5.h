@@ -2,7 +2,7 @@
 #include <Simulator.h>
 #include <RenderPrims.h>
 #include <vector>
-#include <Maya.h>
+#include <Malla.h>
 
 class AA5 : public Simulator
 {
@@ -14,7 +14,8 @@ public:
 	void RenderUpdate() override;
 	void RenderGui() override;
 private:
-	Maya* maya;
+	//Malla* malla;
+	std::vector<Malla*> olas;
 	int rows, cols;
-	float startX, startZ, distance;
+	float startX, startY, startZ, a, wavelenght, freq, phi, amplitude, distance;
 };
